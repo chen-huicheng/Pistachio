@@ -32,10 +32,10 @@
     <ClInclude Include="DisplayByCmd.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="GoBangGame.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="GoBangGame.h">
+    <ClInclude Include="Game.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

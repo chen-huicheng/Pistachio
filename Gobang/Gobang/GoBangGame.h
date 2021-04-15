@@ -18,10 +18,12 @@ public:
 	~GoBangGame() {
 	}
 private:
+	void init();
 	void mode1();
 	void mode2();
-	void player();
+	bool player();
 	void machine();
+	bool repentance();
 	void congratulations(int player);
 	void setPlayer();
 	int setMode();
@@ -30,11 +32,12 @@ private:
 	void change_player();
 	int important();
 	int game_player;
-	shared_ptr<Display> display;
 	int length;
 	int Cx, Cy;
+	bool robot;
 	vector<vector<int>> board;
 	vector<vector<int>> importance;
+	vector<pair<int,int>> history;
 };
 #endif  /* _ManMachineGame */
 //

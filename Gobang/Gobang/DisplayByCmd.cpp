@@ -1,5 +1,5 @@
 #include "DisplayByCmd.h"
-
+using namespace std;
 
 DisplayByCmd::DisplayByCmd(int len) :length(len), Cx(len / 2), Cy(len / 2) {
 	Initialize();
@@ -55,6 +55,7 @@ void DisplayByCmd::show() {
 	system("cls");
 	int i,j;//循环变量
 	int ln=0;
+	Initialize();
 	for(j=0; j<=length; j++) { //写入出交点左上角的字符，因为需要打印棋盘右下角，所以很以横纵各多一次循环
 //		cout<<ln++;
 		for(i=0; i<=length; i++) {

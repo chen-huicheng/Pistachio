@@ -19,7 +19,6 @@ public:
 private:
 	void printAtXY(int x, int y, string str);
 	void setCursorPosition(short int x, short int y);
-	void No_Cursor();
 	string getCurse(int i, int j);
 	string getStyle(int i, int j);
 	void Initialize();

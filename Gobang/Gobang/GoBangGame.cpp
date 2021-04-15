@@ -1,19 +1,38 @@
 #include "GoBangGame.h"
 
-void GoBangGame::run(int type) {
+void GoBangGame::run() {
 	while (1) {
 		int mode = setMode();
 		if (mode < 0)break;
 		setPlayer();
+		init();
 		if (mode == 1) {
+			robot = false;
 			mode1();
 		}
 		else
 		{
+			robot = true;
 			mode2();
 		}
+		system("cls");
 	}
 	
+}
+void GoBangGame::init() {
+	length = LENGTH;
+	Cx = LENGTH / 2;
+	Cy = LENGTH / 2;
+	for (auto &boa : board) {
+		for (auto &item : boa) {
+			item = 0;
+		}
+	}
+	for (auto &imp : importance) {
+		for (auto &item : imp) {
+			item = 0;
+		}
+	}
 }
 bool GoBangGame::judge(int player) {
 	int w = 1, x = 1, y = 1, z = 1, i;//累计横竖正斜反斜四个方向的连续相同棋子数目
@@ -47,15 +66,32 @@ bool GoBangGame::judge(int player) {
 	if (z >= 5)return player;//若果达到5个则判断当前走子玩家为赢家
 	return 0;
 }
-
+bool GoBangGame::repentance() {
+	if (history.empty())return false;
+	pair<int, int> tmp = history.back();
+	history.pop_back();
+	int y = tmp.second - Cy;
+	int x = tmp.first - Cx;
+	display->move(x, y);
+	Sleep(100);
+	Cx = tmp.first;
+	Cy = tmp.second;
+	board[Cx][Cy] = 0;
+	display->back();
+	change_player();
+	return true;
+}
 GoBangGame::GoBangGame():length(LENGTH), Cx(LENGTH / 2), Cy(LENGTH / 2), game_player(1),
-						board(LENGTH, vector<int>(LENGTH, 0)), display(new DisplayByCmd(LENGTH)), importance(LENGTH+5, vector<int>(LENGTH+5, 0))
+						board(LENGTH, vector<int>(LENGTH, 0)), importance(LENGTH+5, vector<int>(LENGTH+5, 0))
 {
+
+	display = shared_ptr<Display>(new DisplayByCmd(LENGTH));
 }
 
 GoBangGame::GoBangGame(int len) : length(len), Cx(len / 2), Cy(len / 2), game_player(1),
-								board(len,vector<int>(len,0)),display(new DisplayByCmd(len)), importance(len+5, vector<int>(len+5, 0))
+								board(len,vector<int>(len,0)), importance(len+5, vector<int>(len+5, 0))
 {
+	display = shared_ptr<Display>(new DisplayByCmd(LENGTH));
 }
 
 void GoBangGame::mode1()
@@ -63,8 +99,9 @@ void GoBangGame::mode1()
 	display->show();
 	while (1)
 	{
-		player();
+		if (!player())return;
 		display->put(game_player);
+		history.push_back(make_pair(Cx, Cy));
 		if (judge(game_player))
 		{
 			congratulations(game_player);
@@ -79,16 +116,19 @@ void GoBangGame::mode2()
 	display->show();
 	while (1)
 	{
-		player();
+		if (!player())return;
 		display->put(game_player);
+		history.push_back(make_pair(Cx, Cy));
 		if (judge(game_player))
 		{
 			congratulations(game_player);
 			break;
 		}
 		machine();
-		cout << game_player << endl;
+		//cout << game_player << endl;
+		Sleep(500);
 		display->put(game_player);
+		history.push_back(make_pair(Cx, Cy));
 		
 		if (judge(game_player))
 		{
@@ -99,7 +139,7 @@ void GoBangGame::mode2()
 	}
 }
 
-void GoBangGame::player()
+bool GoBangGame::player()
 {
 	bool loop = true;
 	while (loop) { //如果按下的是方向键，会填充两次输入，第一次为0xE0表示按下的是控制键
@@ -118,6 +158,16 @@ void GoBangGame::player()
 		case 0x50:
 			y = 1;
 			break;
+		case 0x1B:
+			if (!repentance()) {
+				return false;
+			}
+			if (robot) {
+				if (!repentance()) {
+					return false;
+				}
+			}
+			break;
 		case 0x20:
 			if (board[Cx][Cy] == 0)
 			{
@@ -126,6 +176,7 @@ void GoBangGame::player()
 			}
 			break;
 		}
+
 		Cx += x;
 		Cy += y;
 		if (Cx < 0)Cx = length - 1;//如果光标位置越界则移动到对侧
@@ -134,6 +185,7 @@ void GoBangGame::player()
 		if (Cy > length - 1)Cy = 0;
 		display->move(x, y);
 	}
+	return true;
 }
 
 void GoBangGame::machine()
