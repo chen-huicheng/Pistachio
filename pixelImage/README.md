@@ -14,5 +14,6 @@
 > + --size：填充的图片的大小，默认100*100像素
 
 * 结果展示
-<div align=center><img src="https://img-blog.csdnimg.cn/20190717095540564.jpg" height="300"/> </div>
-<div align=center><img src="https://img-blog.csdnimg.cn/20190717102229545.png" height="300"/> </div>
+<div align=center><img src="https://img-blog.csdnimg.cn/20190717095540564.jpg" width="500"/> </div>
+<div align=center><img src="https://img-blog.csdnimg.cn/20190717102157932.png" width="500"/> </div>
+<div align=center><img src="https://img-blog.csdnimg.cn/20190717102229545.png" width="500"/> </div>
