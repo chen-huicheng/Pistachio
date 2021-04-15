@@ -11,4 +11,5 @@
 > * **像素填充图**
 > * **简介：** 将给定图片集填充到特定图片。
 > * **运行环境：** python3
-> 
+> * **结果展示：**
+>  <div align=center><img src="https://img-blog.csdnimg.cn/20190717102157932.png" width="500"/> </div>
