@@ -11,7 +11,7 @@ using namespace std;
 const int LENGTH = 19;
 class GoBangGame :public Game {
 public:
-	virtual void run(int type);
+	virtual void run();
 	bool judge(int player);
 	GoBangGame();
 	GoBangGame(int len);

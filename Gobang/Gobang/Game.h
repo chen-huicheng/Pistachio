@@ -2,7 +2,7 @@
 #define _GAME 1
 class Game {
 public:
-	virtual void run(int type) {
+	virtual void run() {
 	}
 	bool judge(int player) {
 
