@@ -7,7 +7,7 @@
 > * **运行环境：** windows + vs2017 
 > 
 
-## 1.[Gobang](pixelImage) 
+## 2.[PixelImage](pixelImage/) 
 > * **像素填充图**
 > * **简介：** 将给定图片集填充到特定图片。
 > * **运行环境：** python3
