@@ -1,0 +1,6 @@
+birthday:19970418
+starttime:20201031:213000
+
+//格式 字符后面不要有空格
+birthday:yyyymmdd
+starttime:yyyymmdd:hhmmss
