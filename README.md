@@ -13,3 +13,12 @@
 > * **运行环境：** python3
 > * **结果展示：**
 >  <div align=center><img src="pixelImage/output.png" width="500"/> </div>
+>  
+
+## 2.[foryou](foryou/) 
+> * **字符图动画**
+> * **简介：** 图片转换为字符图，然后以动画形式显示在终端，并且显示。
+> * **运行环境：** windows + vs2017 
+> * **结果展示：**
+>  <div align=center><img src="foryou/output1.png" width="500"/> </div>
+>  <div align=center><img src="foryou/output2.png" width="500"/> </div>
